@@ -16,3 +16,4 @@ jobs:
       run: m4 mediengraph.m4 > create.cypher
     - name: Trigger Webhook
       run: curl -X POST -F 'file=@create.cypher' http://cmclab.science/webpostreceive
+
