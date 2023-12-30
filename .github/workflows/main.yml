@@ -1,0 +1,18 @@
+name: Run M4 Macro and Trigger Webhook
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run-m4-and-trigger-webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install M4
+      run: sudo apt-get install -y m4
+    - name: Run M4 Macro
+      run: m4 mediengraph.m4 > create.cypher
+    - name: Trigger Webhook
+      run: curl -X POST -F 'file=@create.cypher' http://cmclab.science/webpostreceive
